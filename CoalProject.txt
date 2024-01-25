@@ -1,0 +1,723 @@
+ExitProcess proto
+WriteString proto
+ReadInt64 proto
+ReadString proto
+WriteInt64 proto
+Crlf proto
+
+.data
+
+PasswordPrompt db "                 Enter password for Login: ", 0
+    InvalidPasswordPrompt db "Invalid password. Exiting.", 0
+    SuccessPrompt db "Login successful.", 0
+    pass dq ?
+
+String1 db  "          **********************      ", 0
+String2 db  "          *                                                            *      ", 0
+String3 db  "          *                                                            *      ", 0
+String4 db  "          *       ****   WELCOME    ***                    *      ", 0
+String5 db  "          *       ****     TO       ***                    *      ", 0
+String6 db  "          *       ****     MY       ***                    *      ", 0
+String7 db  "          *       ****  NUTRITION   ***                    *      ", 0
+String8 db  "          *       ****     APP      ***                    *      ", 0
+String9 db  "          *                                                            *      ", 0
+String10 db "          *                                                            *      ", 0
+String11 db "          **********************      ", 0
+String12 db "                     ***********  ", 0
+
+String13 db "      We Need To Calculate Your BMI ( BODY MASS INDEX ) For Prescribing You diet According to Calieries    ", 0
+String14 db "                            So That You Can Maintain Your Health                                           ", 0
+StringName db "   Enter your name: ",0
+StringImperial db " Press 1 if you want to calculate bmi by Imperial System(inches,pounds): ",0
+StringMetric db "   Press 2 if you want to calculate bmi by Metric System(meters,kg): ",0
+Stringinvalid db "   Invalid choice : ",0
+StringHeight db "   Enter the Height (in meters):  ", 0
+StringWeight db "   Enter the Weight (in kg) :     ", 0
+StringHeight2 db "   Enter the Height (in inches):  ", 0
+StringWeight2 db "   Enter the Weight (in pounds) :     ", 0
+StringBmi db "   Your BMI Is: ", 0
+
+StringUnderweight db "                                You Are Under weight  ", 0
+StringPerfect db "                                Your weight is Perfect   ", 0
+StringOverweight db "                                You Are Over weight  ", 0
+StringObese db "                      Oh Yarr Thora kam khaya kro Bhoat weight barh gya ha: HAHAHAHAHAHHA", 0
+
+String23 db  "   Press 1 to see the instruction for gain the perfect weight if you are under-weight   ", 0
+String24 db  "   Press 2 to see the instruction for gain the perfect weight if you are over-weight    ", 0
+String245 db  "   Press 3 to see the instruction for gain the perfect weight if you are normal-weight    ", 0
+String244 db  "   Press 4 to move on next step:    ", 0
+StringCongratulation db "   Congratulation..! Keep it up.  ", 0
+
+String26 db "   1.Eat more and sleep 8 hours a day.   ", 0
+String27 db "   2.Absorb high calorie food (potato, brown rice, chicken breast, check peas, almond, sweet potato etc.)   ", 0
+String28 db "   3.Drink at least 3L water per day.   ", 0
+String29 db "   4.Eat vegetables and 1 glass of milk and 1 whole egg each day.   ", 0
+
+String26_normal db "   1. Maintain a balanced diet with a mix of carbohydrates, proteins, and fats.   ", 0
+String27_normal db "   2. Include whole grains, lean proteins, and a variety of vegetables in your meals.   ", 0
+String28_normal db "   3. Drink at least 2-3 liters of water per day for hydration.   ", 0
+String29_normal db "   4. Consume dairy products, fruits, and nuts for overall nutrition.   ", 0
+
+
+String30 db "   1.Try to follow a low calorie healthy diet.   ", 0
+String31 db "   2.Eat high protein, vegetables and avoid fast food.   ", 0
+String32 db "   3.Do some workout for weight lose (walking, running, crunching, ropping ).   ", 0
+String33 db "   4. Avoid to eating from outside likes hotels or restaurant.   ", 0
+
+Stringnorm1 db " Press 1 for seeing Eating Plan: ", 0
+Stringnorm2 db " Press 2 for seeing Exercise Plan: ", 0
+Stringnorm3 db " Press 3 for seeing Daily Plan: ", 0
+Stringnorm4 db " Press 4 for Go back: ", 0
+Stringnorm5 db " Press 5 for Next: ", 0
+
+UnderweightMorningPlan db "Underweight Morning Plan: Include a hearty breakfast with a mix of carbohydrates, proteins, and healthy fats.", 0
+UnderweightNoonPlan db "Underweight Noon Plan: Focus on nutrient-dense foods, including whole grains, lean proteins, and plenty of vegetables.", 0
+UnderweightEveningPlan db "Underweight Evening Plan: Include a protein-rich dinner with lean meats, vegetables, and complex carbohydrates.", 0
+
+NormalWeightMorningPlan db "Normal Weight Morning Plan: Have a balanced breakfast with a mix of carbohydrates, proteins, and healthy fats.", 0
+NormalWeightNoonPlan db "Normal Weight Noon Plan: Opt for a well-rounded lunch with whole grains, lean proteins, and a variety of vegetables.", 0
+NormalWeightEveningPlan db "Normal Weight Evening Plan: Enjoy a light dinner with lean proteins, vegetables, and complex carbohydrates.", 0
+
+OverweightMorningPlan db "Overweight Morning Plan: Start your day with a light and nutritious breakfast focusing on whole grains, fruits, and lean proteins.", 0
+OverweightNoonPlan db "Overweight Noon Plan: Choose a moderate lunch with portion control, incorporating vegetables, lean proteins, and complex carbs.", 0
+OverweightEveningPlan db "Overweight Evening Plan: Opt for a light dinner with lean proteins, vegetables, and minimal carbohydrates.", 0
+
+UnderweightExercisePlan db "1. Strength training to build muscle mass.", 0
+OverweightExercisePlan db "2. Incorporate cardio exercises like running or cycling for weight loss.", 0
+NormalWeightExercisePlan db "3. A balanced mix of cardio and strength training for overall fitness.", 0
+
+UnderweightExerciseDetails db "   a. Weightlifting: Focus on compound exercises like squats, deadlifts, and bench presses.", 0
+OverweightExerciseDetails db "   b. Cardio Routine: Include 30-45 minutes of moderate-intensity cardio, such as brisk walking.", 0
+NormalWeightExerciseDetails db "   c. Circuit Training: Combine cardio activities with strength training exercises in a circuit.", 0
+
+UnderweightExerciseDuration db "   d. Aim for 3-4 days of exercise per week, with adequate rest between sessions.", 0
+OverweightExerciseDuration db "   e. Gradually increase cardio duration to 60 minutes per session for effective weight loss.", 0
+NormalWeightExerciseDuration db "   f. Plan 5 days of exercise per week, alternating between cardio and strength training.", 0
+
+UnderweightVegetablesPlan db "1. Include a variety of colorful vegetables in your daily diet to ensure a wide range of nutrients.", 0
+UnderweightFruitsPlan db "2. Incorporate a mix of fresh fruits for a natural source of vitamins and minerals.", 0
+UnderweightMeatsPlan db "3. Include lean meats like chicken and fish for protein intake to help build muscle mass.", 0
+
+OverweightVegetablesPlan db "1. Focus on low-calorie, high-fiber vegetables to promote weight loss.", 0
+OverweightFruitsPlan db "2. Choose fruits with lower sugar content and high water content for a balanced diet.", 0
+OverweightMeatsPlan db "3. Opt for lean protein sources like chicken and fish to support weight management.", 0
+
+NormalWeightVegetablesPlan db "1. Maintain a balanced diet with a variety of vegetables for overall health.", 0
+NormalWeightFruitsPlan db "2. Enjoy a mix of fruits to provide essential nutrients for your well-being.", 0
+NormalWeightMeatsPlan db "3. Include a moderate amount of lean meats for protein and other vital nutrients.", 0
+
+StringRecalculate db "   Press 1 to Recalculate.   ", 0
+StringExit db "   Press 2 to EXIT.   ", 0
+
+String35 db "             *******************               ", 0
+String36 db "             *                       THANK                           *               ", 0
+String37 db "             *                               YOU                     *               ", 0
+String38 db "             *                                       DEARS           *               ", 0
+String39 db "             *******************               ", 0
+
+num dq ?
+name db 10 ?
+height dq ?
+weight dq ?
+bmi dq ?
+.code
+main proc
+call crlf 
+call crlf
+; Ask for password
+    mov rdx, offset PasswordPrompt
+    call WriteString
+    mov rax, 0
+    call ReadInt64
+    mov pass, rax
+
+    cmp rax, 123321
+    je Successful
+    jmp invalid_login
+
+    Successful:
+
+     call crlf
+     call crlf
+     call crlf
+     
+                                   ; Prompt to display First String
+    mov rdx, offset String1
+    call WriteString
+    call crlf
+                                    ; Prompt to display Second String
+    mov rdx, offset String2
+    call WriteString
+    call crlf
+                                    ; Prompt to display Third String
+    mov rdx, offset String3
+    call WriteString
+    call crlf
+                                    ; Prompt to display Four String
+    mov rdx, offset String4
+    call WriteString
+    call crlf
+                                    ; Prompt to display Five String
+    mov rdx, offset String5
+    call WriteString
+    call crlf
+                                    ; Prompt to display Six String
+    mov rdx, offset String6
+    call WriteString
+    call crlf
+                                    ; Prompt to display Seven String
+    mov rdx, offset String7
+    call WriteString
+    call crlf
+                                    ; Prompt to display Eight String
+    mov rdx, offset String8
+    call WriteString
+    call crlf
+                                    ; Prompt to display Nine String
+    mov rdx, offset String9
+    call WriteString
+    call crlf
+                                    ; Prompt to display Ten String
+    mov rdx, offset String10
+    call WriteString
+    call crlf
+                                    ; Prompt to display Eleven String
+    mov rdx, offset String11
+    call WriteString
+    call crlf
+                                    ; Prompt to display Twelve String
+    mov rdx, offset String12
+    call WriteString
+    call crlf
+    call crlf
+    
+                                    ; Prompt to display Thirteen String
+    mov rdx, offset String13
+    call WriteString
+    call crlf
+    
+                                     ; Prompt to display Fourteen String
+    mov rdx, offset String14
+    call WriteString
+    call crlf
+
+                            ; Prompt the user to enter their name
+    mov rdx, offset StringName
+    call WriteString
+
+                           ; Read the user's name
+    
+    mov rcx, 30
+    call ReadString
+    call crlf
+
+    main1:
+    mov rdx, offset StringImperial
+    call WriteString
+    call crlf
+    mov rdx, offset StringMetric
+    call WriteString
+
+     ; Read user's choice
+    MOV RAX, 0
+    call ReadInt64
+    mov num, rax
+    ; Process user's choice
+    cmp rax, 1
+    je Imperial
+    cmp rax, 2
+    je Metric
+    cmp rax,num
+    je invalid
+    
+    invalid:
+      mov rdx, offset Stringinvalid
+    call WriteString
+    call crlf
+    jmp main1
+
+    Imperial:
+    mov rdx, offset StringHeight2
+    call WriteString
+           
+           ; Prompt For user input
+    MOV RAX,0             ;TO CLEAR RAX
+    call ReadInt64
+    mov height, rax
+    
+                                     ; Prompt to display Seventeen String
+    mov rdx, offset StringWeight2
+    call WriteString
+                            ; Prompt For user input
+    MOV RAX,0        ;TO CLEAR RAX
+    call ReadInt64
+    mov weight, rax
+    call crlf
+        ; Calculate BMI: BMI = (weight / (height * height)) * 703
+     mov rax, weight
+    imul rax, 703
+    mov rbx, height
+    imul rbx, height
+    xor rdx, rdx
+    div rbx
+    mov bmi, rax
+    jmp Stringanswer
+
+
+    Metric:
+                                     ; Prompt to display Sixteen String
+    mov rdx, offset StringHeight
+    call WriteString
+           
+           ; Prompt For user input
+    MOV RAX,0             ;TO CLEAR RAX
+    call ReadInt64
+    mov height, rax
+    
+                                     ; Prompt to display Seventeen String
+    mov rdx, offset StringWeight
+    call WriteString
+                            ; Prompt For user input
+    MOV RAX,0        ;TO CLEAR RAX
+    call ReadInt64
+    mov weight, rax
+    call crlf
+
+                   ; Calculate BMI: BMI = weight / (height * height)
+    mov rax, weight      
+    mov rbx, height
+    imul rbx, height
+    xor rdx, rdx
+    div rbx
+    mov bmi, rax          ; mov value of rax in BMI
+    jmp Stringanswer
+
+    Stringanswer:                       
+    mov rdx, offset StringBmi    ; Display BMI String
+    call WriteString
+    mov rax, bmi                 ; mov BMI to rax register
+    call WriteInt64              ; print value of BMI
+    call crlf
+    call crlf
+
+    ; Determine weight status
+    mov rdx, 0
+    mov r8, bmi             ;  mov  bmi to r8 register
+    cmp r8, 18              ; compare value of r8 reg and 18
+    jl underweight          ; if value is less then jump to underweight
+    cmp r8, 24              ; compare value of r8 reg and 24
+    jle normalweight        ; if value is less or equal then jump to Normalweight
+    cmp r8, 29              ; compare value of r8 reg and 29
+    jle overweight           ; if value is less or equal then jump to Overweight
+    jmp obese               ; else jump to obese
+
+underweight:                  ; label similar as function
+                                ; Prompt to display Ninteen String
+    mov rdx, offset StringUnderweight
+    call WriteString
+    jmp options
+
+normalweight:
+                                ; Prompt to display Twenty String
+    mov rdx, offset StringPerfect
+    call WriteString
+    call crlf
+    mov rdx, offset StringCongratulation
+    call WriteString
+    jmp options
+
+overweight:
+                                ; Prompt to display Twenty-One String
+    mov rdx, offset StringOverweight
+    call WriteString
+    jmp options
+
+obese:
+                                ; Prompt to display Twenty-Two String
+    mov rdx, offset StringObese
+    call WriteString
+    jmp options
+
+    options:                         ; Options label
+    ; Display Thirty-Two String
+    call crlf
+    mov rdx, offset String23         ; String for underweight Instruction
+    call WriteString
+    ; Display Thirty-Three String
+    call crlf
+    mov rdx, offset String24          ; String for overweight Instruction
+    call WriteString
+    call crlf
+    mov rdx, offset String245          ; Move to next step String
+    call WriteString
+    call crlf
+    mov rdx, offset String244          ; Move to next step String
+    call WriteString
+
+    ; Read user's choice
+    MOV RAX, 0
+    call ReadInt64                   ; Read the user choice 1, 2 or 3
+
+    ; Process user's choice
+    cmp rax, 1
+    je UnderWeight1            ; if user press 1 jump to underweight label
+    cmp rax, 2
+    je OverWeight2             ; if user press 2 jump to Overweight label
+     cmp rax, 3
+    je NormalWeight3 
+    cmp rax, 4
+    je optionsloop             ; if user press 3 jump to optionsloop label for recalculate or exit
+
+    UnderWeight1:
+
+    call crlf
+    call crlf
+    mov rdx, offset String26
+    call WriteString
+    call crlf
+                                    ; Prompt to display Twenty-Seven String
+    mov rdx, offset String27
+    call WriteString
+    call crlf
+                                    ; Prompt to display Twenty-Eight String
+    mov rdx, offset String28
+    call WriteString
+    call crlf
+                                     ; Prompt to display Twenty-Nine String
+    mov rdx, offset String29
+    call WriteString
+    call crlf
+
+    ReUnderweight:
+
+     mov rdx, offset Stringnorm1
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm2
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm3
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm4
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm5
+    call WriteString
+    call crlf
+    call crlf
+     ; Read user's choice
+    MOV RAX, 0
+    call ReadInt64
+
+    ; Process user's choice
+    cmp rax, 1
+    je Eating1
+    cmp rax, 2
+    je Exercise1
+    cmp rax, 3
+    je Daily1
+    cmp rax, 4
+    je Back
+    cmp rax, 5
+    je Next
+
+    Eating1:
+     ; Display underweight diet plans
+    mov rdx, offset UnderweightVegetablesPlan
+    call WriteString
+    call crlf
+    mov rdx, offset UnderweightFruitsPlan
+    call WriteString
+    call crlf
+    mov rdx, offset UnderweightMeatsPlan
+    call WriteString
+    call crlf
+    call crlf
+    jmp ReUnderweight
+    Exercise1:
+    mov rdx, offset UnderweightExercisePlan
+    call WriteString
+    call crlf
+    mov rdx, offset UnderweightExerciseDetails
+    call WriteString
+    call crlf
+    mov rdx, offset UnderweightExerciseDuration
+    call WriteString
+    call crlf
+    call crlf
+    jmp ReUnderweight
+    Daily1:
+    mov rdx, offset UnderweightMorningPlan
+    call WriteString
+    call crlf
+    mov rdx, offset UnderweightNoonPlan
+    call WriteString
+    call crlf
+    mov rdx, offset UnderweightEveningPlan
+    call WriteString
+    call crlf
+    call crlf
+    jmp ReUnderweight
+    Back:
+    jmp options
+    Next:
+    jmp optionsloop
+
+    OverWeight2:
+
+     call crlf
+    call crlf
+    mov rdx, offset String30
+    call WriteString
+    call crlf
+                                    ; Prompt to display Thirty-One String
+    mov rdx, offset String31
+    call WriteString
+    call crlf
+                                    ; Prompt to display Thirty-Two String
+    mov rdx, offset String32
+    call WriteString
+    call crlf
+                                     ; Prompt to display Thirty-Three String
+    mov rdx, offset String33
+    call WriteString
+    call crlf
+    call crlf
+
+    ReOverweight:
+     mov rdx, offset Stringnorm1
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm2
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm3
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm4
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm5
+    call WriteString
+    call crlf
+
+     ; Read user's choice
+    MOV RAX, 0
+    call ReadInt64
+
+    ; Process user's choice
+    cmp rax, 1
+    je Eating2
+    cmp rax, 2
+    je Exercise2
+    cmp rax, 3
+    je Daily2
+    cmp rax, 4
+    je Back2
+    cmp rax, 5
+    je Next2
+    Eating2:
+    ; Display overweight diet plans
+    mov rdx, offset OverweightVegetablesPlan
+    call WriteString
+    call crlf
+    mov rdx, offset OverweightFruitsPlan
+    call WriteString
+    call crlf
+    mov rdx, offset OverweightMeatsPlan
+    call WriteString
+    call crlf
+    call crlf
+    jmp ReOverweight
+    Exercise2:
+    mov rdx, offset OverweightExercisePlan
+    call WriteString
+    call crlf
+    mov rdx, offset OverweightExerciseDetails
+    call WriteString
+    call crlf
+    mov rdx, offset OverweightExerciseDuration
+    call WriteString
+    call crlf
+    call crlf
+    jmp ReOverweight
+    Daily2:
+    mov rdx, offset OverweightMorningPlan
+    call WriteString
+    call crlf
+    mov rdx, offset OverweightNoonPlan
+    call WriteString
+    call crlf
+    mov rdx, offset OverweightEveningPlan
+    call WriteString
+    call crlf
+    call crlf
+    jmp ReOverweight
+    Back2:
+    jmp options
+    Next2:
+    jmp optionsloop
+
+    NormalWeight3:
+
+     call crlf
+    mov rdx, offset String26_normal
+    call WriteString
+    call crlf
+                                    ; Prompt to display Twenty-Seven String
+    mov rdx, offset String27_normal
+    call WriteString
+    call crlf
+                                    ; Prompt to display Twenty-Eight String
+    mov rdx, offset String28_normal
+    call WriteString
+    call crlf
+                                     ; Prompt to display Twenty-Nine String
+    mov rdx, offset String29_normal
+    call WriteString
+    call crlf
+    call crlf
+    Renormalweight:
+
+     mov rdx, offset Stringnorm1
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm2
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm3
+    call WriteString
+    call crlf
+    mov rdx, offset Stringnorm4
+    call WriteString
+    call crlf
+     mov rdx, offset Stringnorm5
+    call WriteString
+    call crlf
+
+     ; Read user's choice
+    MOV RAX, 0
+    call ReadInt64
+
+    ; Process user's choice
+    cmp rax, 1
+    je Eating3
+    cmp rax, 2
+    je Exercise3
+    cmp rax, 3
+    je Daily3
+    cmp rax, 4
+    je Back3
+    cmp rax, 5
+    je Next3
+
+    Eating3:
+
+    ; Display normal weight diet plans
+    mov rdx, offset NormalWeightVegetablesPlan
+    call WriteString
+    call crlf
+    mov rdx, offset NormalWeightFruitsPlan
+    call WriteString
+    call crlf
+    mov rdx, offset NormalWeightMeatsPlan
+    call WriteString
+    call crlf
+    call crlf
+    jmp Renormalweight
+    Exercise3:
+
+    mov rdx, offset NormalWeightExercisePlan
+    call WriteString
+    call crlf
+    mov rdx, offset NormalWeightExerciseDetails
+    call WriteString
+    call crlf
+    mov rdx, offset NormalWeightExerciseDuration
+    call WriteString
+    call crlf
+    call crlf
+    jmp Renormalweight
+    Daily3:
+    mov rdx, offset NormalWeightMorningPlan
+    call WriteString
+    call crlf
+    mov rdx, offset NormalWeightNoonPlan
+    call WriteString
+    call crlf
+    mov rdx, offset NormalWeightEveningPlan
+    call WriteString
+    call crlf
+    call crlf
+    jmp Renormalweight
+    Back3:
+    jmp options
+    Next3:
+    jmp optionsloop
+
+    optionsloop:
+                                  ; Display Thirty-Three String
+    call crlf
+    mov rdx, offset StringRecalculate           ;
+    call WriteString
+    ; Display Thirty-Three String
+    call crlf
+    mov rdx, offset StringExit
+    call WriteString
+
+    ; Read user's choice
+    MOV RAX, 0
+    call ReadInt64
+    mov num, rax
+    ; Process user's choice
+    cmp rax, 1
+    je recalculate
+    cmp rax, 2
+    je exitProgram
+    cmp rax,num
+    je invalid1
+
+    invalid1:
+    mov rdx, offset Stringinvalid
+    call WriteString
+    call crlf
+    jmp optionsloop
+recalculate:
+    jmp main1
+
+
+                                 
+    exitProgram:
+   
+                                    ; Prompt to display Thirty-Five String
+    call crlf
+    call crlf
+    mov rdx, offset String35
+    call WriteString
+    call crlf
+                                    ; Prompt to display Thirty-Six String
+    mov rdx, offset String36
+    call WriteString
+    call crlf
+                                    ; Prompt to display Thirty-Seven String
+    mov rdx, offset String37
+    call WriteString
+    call crlf
+                                     ; Prompt to display Thirty-Eight String
+    mov rdx, offset String38
+    call WriteString
+    call crlf
+                                    ; Prompt to display Thirty-Nine String
+    mov rdx, offset String39
+    call WriteString
+    call crlf
+    jmp Quit
+    invalid_login:
+    mov rdx, offset InvalidPasswordPrompt
+    call WriteString
+    call crlf
+    Quit:
+    call ExitProcess
+main endp
+end
